@@ -176,7 +176,7 @@ bool CSGO::init( ) {
 	// prediction pointers.
 	m_nPredictionRandomSeed = util::get_method( m_prediction, CPrediction::RUNCOMMAND ).add( 0x30 ).get< int* >( );
 	m_pPredictionPlayer     = util::get_method( m_prediction, CPrediction::RUNCOMMAND ).add( 0x54 ).get< Player* >( );
-
+/*
 	// some weird tier0 stuff that prevents me from debugging properly...
 #ifdef _DEBUG
 	Address debugbreak = pattern::find( g_csgo.m_client_dll, XOR( "CC F3 0F 10 4D ? 0F 57 C0" ) );
@@ -188,6 +188,7 @@ bool CSGO::init( ) {
 
 	g_winapi.VirtualProtect( debugbreak, 1, old, &old );
 #endif
+*/
 
     // init everything else.
 	g_config.init( );

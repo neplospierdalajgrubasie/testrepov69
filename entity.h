@@ -716,6 +716,11 @@ public:
 		return get< CBoneCache >(g_entoffsets.m_BoneCache);
 	}
 
+	__forceinline matrix3x4_t**& m_iBoneCache() {
+		// TODO; sig
+		return get< matrix3x4_t** >(g_entoffsets.m_BoneCache);
+	}
+
 	__forceinline EHANDLE &m_hObserverTarget() {
 		return get< EHANDLE >(g_entoffsets.m_hObserverTarget);
 	}
@@ -764,7 +769,7 @@ public:
 		BUILDTRANSFORMATIONS = 184,
 		DOEXTRABONEPROCESSING = 192,
 		STANDARDBLENDINGRULES = 200,
-		UPDATECLIENTSIDEANIMATION = 218, // 55 8B EC 51 56 8B F1 80 BE ? ? ? ? ? 74 36
+		UPDATECLIENTSIDEANIMATION = 218, // 218 // 55 8B EC 51 56 8B F1 80 BE ? ? ? ? ? 74 36
 		GETACTIVEWEAPON = 262,
 		GETEYEPOS = 163,
 		GETFOV = 321,
@@ -1223,9 +1228,38 @@ public:
 		return get< float >(g_entoffsets.m_flConstraintRadius);
 	}
 
+	__forceinline bool IsGun()
+	{
+		if (!this)
+			return false;
+
+		int id = this->m_iItemDefinitionIndex();
+		if (!id)
+			return false;
+
+		if (this->IsKnife() || this->IsGrenade())
+			return false;
+		else
+			return true;
+	}
+
+	__forceinline bool isShotgun()
+	{
+		int WeaponId = this->m_iItemDefinitionIndex();
+		return WeaponId == XM1014 || WeaponId == NOVA || WeaponId == SAWEDOFF || WeaponId == MAG7;
+	}
 	__forceinline float &m_fLastShotTime() {
 		return get< float >(g_entoffsets.m_fLastShotTime);
 	}
+
+	__forceinline bool DTable() {
+		int WeaponId = this->m_iItemDefinitionIndex();
+		return IsGun() && !isShotgun() && WeaponId != SSG08 && WeaponId != AWP && WeaponId != REVOLVER && WeaponId != ZEUS;
+	}
+
+
+	__forceinline bool IsGrenade() { return m_iItemDefinitionIndex() >= Weapons_t::FLASHBANG && m_iItemDefinitionIndex() <= Weapons_t::FIREBOMB; }
+
 
 public:
 	enum indices : size_t {

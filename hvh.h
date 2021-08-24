@@ -7,9 +7,9 @@ public:
 
 public:
 	// ctor.
-	__forceinline AdaptiveAngle( float yaw, float penalty = 0.f ) {
+	__forceinline AdaptiveAngle(float yaw, float penalty = 0.f) {
 		// set yaw.
-		m_yaw = math::NormalizedAngle( yaw );
+		m_yaw = math::NormalizedAngle(yaw);
 
 		// init distance.
 		m_dist = 0.f;
@@ -49,16 +49,18 @@ public:
 	float  m_auto_last;
 	float  m_view;
 
+	bool   m_left, m_right, m_back;
+
 public:
-	void IdealPitch( );
-	void AntiAimPitch( );
-	void AutoDirection( );
-	void GetAntiAimDirection( );
-    bool DoEdgeAntiAim( Player *player, ang_t &out );
-	void DoRealAntiAim( );
-	void DoFakeAntiAim( );
-	void AntiAim( );
-	void SendPacket( );
+	void IdealPitch();
+	void AntiAimPitch();
+	void AutoDirection();
+	void GetAntiAimDirection();
+	bool DoEdgeAntiAim(Player* player, ang_t& out);
+	void DoRealAntiAim();
+	void DoFakeAntiAim();
+	void AntiAim();
+	void SendPacket();
 };
 
 extern HVH g_hvh;

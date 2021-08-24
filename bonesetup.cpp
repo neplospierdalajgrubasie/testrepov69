@@ -82,6 +82,7 @@ bool Bones::BuildBones( Player* target, int mask, BoneArray* out, LagRecord* rec
 	accessor->m_pBones = backup_matrix;
 
 	// restore original interpolated entity data.
+	target->m_fEffects() &= ~EF_NOINTERP;
 	target->SetAbsOrigin( backup_origin );
 	target->SetAbsAngles( backup_angles );
 	target->SetPoseParameters( backup_poses );

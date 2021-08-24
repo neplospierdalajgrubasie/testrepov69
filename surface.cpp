@@ -56,5 +56,5 @@ void Hooks::OnScreenSizeChanged( int oldwidth, int oldheight ) {
 
 	render::init( );
 
-	Visuals::ModulateWorld( );
+	g_visuals.ModulateWorld();
 }

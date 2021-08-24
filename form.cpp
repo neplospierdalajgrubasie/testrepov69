@@ -25,6 +25,13 @@ void Form::draw( ) {
 	// background.
 	render::rect_filled( m_x, m_y, m_width, m_height, { 12, 12, 12, m_alpha } );
 
+	// lbgt line
+	render::gradient1337(m_x + 7, m_y + 7, m_width / 2 - 7, 1, { color}, { color});
+	render::gradient1337(m_x + (m_width / 2), m_y + 7, m_width / 2 - 7, 1, { color }, { color });
+
+	render::gradient1337(m_x + 7, m_y + 7 + 1, m_width / 2 - 7, 1, { color }, { color });
+	render::gradient1337(m_x + (m_width / 2), m_y + 7 + 1, m_width / 2 - 7, 1, { color }, { color });
+
 	// border.
 	render::rect( m_x, m_y, m_width, m_height, { 5, 5, 5, m_alpha } );
 	render::rect( m_x + 1, m_y + 1, m_width - 2, m_height - 2, { 60, 60, 60, m_alpha } );

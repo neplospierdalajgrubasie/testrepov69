@@ -175,6 +175,21 @@ public:
 		GETFLAG                 = 30
 	};
 
+	__forceinline virtual IMaterial* FindVar(const char* varName, bool* found, bool complain = true) = 0;
+
+	__forceinline void SetVecValue(float r, float g, float b) {
+		using original_fn = void(__thiscall*)(IMaterial*, float, float, float);
+		return (*(original_fn**)this)[11](this, r, g, b);
+	}
+	__forceinline void SetVecValue(int val) {
+		using original_fn = void(__thiscall*)(IMaterial*, int);
+		(*(original_fn**)this)[4](this, val);
+	}
+	__forceinline void SetVecValue(float val) {
+		using original_fn = void(__thiscall*)(IMaterial*, float);
+		(*(original_fn**)this)[4](this, val);
+	}
+
 	__forceinline const char* GetName( ) {
 		return util::get_method< const char* ( __thiscall* )( void* ) >( this, GETNAME )( this );
 	}

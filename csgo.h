@@ -267,6 +267,14 @@ namespace game {
 		}
 	}
 
+	template<class T = DWORD>
+	__forceinline T* FindHudElement(const char* name) {
+		static auto pThis = *pattern::find(g_csgo.m_client_dll, XOR("B9 ? ? ? ? E8 ? ? ? ? 8B 5D 08")).add(0x1).as< DWORD**>();
+
+		static auto find_hud_element = pattern::find(g_csgo.m_client_dll, ("55 8B EC 53 8B 5D 08 56 57 8B F9 33 F6 39")).as<DWORD(__thiscall*)(void*, const char*)>();
+		return (T*)find_hud_element(pThis, name);
+	}
+
 	bool   IsBreakable(Entity *ent);
 	Beam_t *CreateGenericBeam(const BeamInfo_t &beam_info);
 }
